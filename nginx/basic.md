@@ -142,3 +142,65 @@ ps aux | grep nginx
 ```
 sudo pkill -QUIT nginx  
 ```
+
+
+## Basic NGINX Commands
+
+Every configuration thing in nginx is called as Directive. This directives are key value pairs.
+
+```
+worker_processes 1;
+worker_processes auto;      #ngnix will automatically detech
+worker_connections 1024;    #No of connections for each proccess
+```
+This directive define how many worker proccess should run in ngnix server.
+worker_connections are defined inside events context.
+
+## Context
+
+Some top-level directives referred to as contexts
+
+- **events** - General connection process.
+- **http** - HTTP traffic
+- **mail** - MAIL traffic
+- **stream** - TCP and UDP traffic
+
+
+### Mime types
+
+This will include all the file types into nginx.config file 
+```
+include mime.types;
+```
+
+### Upstream
+
+All the web servers lies in upstream
+```
+upstream name_of_upstream {
+        least_conn;           
+        server 127.0.0.1:3001;
+        server 127.0.0.1:3002;
+        server 127.0.0.1:3003;
+    }
+```
+least_conn is the algorithm type for reverse proxy, if you dont mention anything default nginx will follow *round-robin*.
+
+### listen
+
+By default ngnix run in 8080 port, we can change that by listen directive
+```
+listen 8080
+```
+
+### Location
+
+location is like routing to nginx it will handle routing according to the configuration.proxy_pass will hit the url rather then redirecting.
+
+```
+location / {
+    proxy_pass URL;
+ }
+```
+
+
