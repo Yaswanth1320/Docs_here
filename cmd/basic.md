@@ -68,3 +68,39 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key
 ```
 
 This cmd will create a public key and a private key in the ssl folder
+
+### To find the ipaddress of the computer
+
+```
+ifconfig
+```
+
+If you need only the ip address you can also use
+```
+ipconfig getifaddr en0
+```
+
+### React Native expo go error solution
+
+The problem lies in the ip address of the system not matches with expo go ip address,they should be same to run an expo app.
+
+To fix it here is the solution
+
+**Step-1**
+```
+echo 'export REACT_NATIVE_PACKAGER_HOSTNAME=(System ip address)' >> ~/.zshrc
+source ~/.zshrc  # Apply the changes to your current session
+```
+
+**Step-2**
+
+```
+echo 'export REACT_NATIVE_PACKAGER_HOSTNAME=172.20.10.11' >> ~/.bash_profile
+source ~/.bash_profile  # Apply the changes
+```
+
+After this the app should work fine .to check the ip address of expo add use
+```
+export REACT_NATIVE_PACKAGER_HOSTNAME=172.20.10.11
+```
+
